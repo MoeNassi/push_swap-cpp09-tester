@@ -1,1 +1,2 @@
-simply run the executable using : bash tester.sh
+- :: simply run the executable using : bash tester.sh
+- :: [test interface](test.png)
