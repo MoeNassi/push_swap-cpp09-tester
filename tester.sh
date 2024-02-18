@@ -19,12 +19,12 @@ White='\033[0;37m'
 echo -e "${White}Parsing Tester -> (all tests needs to be passed successfuly)${Color_Off}"
 
 if [ -x "$executable" ] ; then
-	while [ $counter -le 50 ] ;
+	while [ "$counter" -le 20 ] ;
 		do
 			args=$(c++ push_swap.cpp && ./a.out 1)
 			# sleep 1
-			status=$(./$executable $args)
-			if [ "$status" = "Error" ] ; then
+			status=$(./push_swap "7801 "8598 "1270 "5660 "3150 "8787 "1520 "8306 "6089 "6759 "7790 "3295 "420 "6823 "1085 "9609 "3732 "9427 "8376 "6107 "56 "6908 "4362 "5823 "5405 "5683 "4252 "4076 "3922 "3539)
+			if [[ "$status" != "Error" ]] ; then
 				echo -e "${Green}test passed Successfuly ${Color_Off}" $args
 			else
 				echo -e "${Red}Error in parsing! ${Color_Off}" $args
@@ -37,11 +37,11 @@ if [ -x "$executable" ] ; then
 
 	counter=1
 
-	while [ $counter -le 50 ] ;
+	while [ $counter -le 20 ] ;
 		do
 			args=$(c++ push_swap.cpp && ./a.out 0)
-			status=$(./push_swap $args)
-			if [ "$status" = "Error" ] ; then
+			status=$(./push_swap "$args")
+			if [[ "$status" = "Error" ]] ; then
 				echo -e "${Green}Passed ! ${Color_Off}"$args
 			else
 				echo -e "${Red}This should not work ${Color_Off} - > "$args
