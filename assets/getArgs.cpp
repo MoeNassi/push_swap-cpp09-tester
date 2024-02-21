@@ -3,7 +3,7 @@
 
 std::string	to_lower(std::string &av) {
 	for (int i = 0; i < av.length(); i++)
-		std::tolower(av[i]);
+		av[i] = std::tolower(av[i]);
 	return av;
 }
 
@@ -19,11 +19,11 @@ int main( int ac, char **av) {
 	std::string	getThem;
 	for (int i = 0; i < ac; i++) {
 		std::string arg = av[i];
-		if (!to_lower(arg).compare("after")) {
+		if (!to_lower(arg).compare("after") || !to_lower(arg).compare("after:")) {
 			for (; i < ac; i++)
 				if (isdigit(av[i]))
 					break ;
-			for (; i + 1 < ac && isdigit(av[i]) || std::string(av[i + 1]) == " "; i++) {
+			for (; i < ac && isdigit(av[i]) || std::string(av[i + 1]) == " "; i++) {
 				if (std::string(av[i]) == " ")
 					continue ;
 				getThem += std::string(av[i]) + " ";

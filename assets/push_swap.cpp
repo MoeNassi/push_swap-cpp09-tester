@@ -1,5 +1,6 @@
 #include <iostream>
 #include <limits.h>
+#include "manual_tests.hpp"
 
 #define AllowChars "\"-"
 #define Disallowed  "abcdefghijklmnopqrstuvwxyz"
@@ -34,12 +35,21 @@ void	Forbidden() {
 	std::cout << argument << std::endl;
 }
 
+void	random_() {
+	std::cout << test_1 << std::endl;
+	std::cout << test_2 << std::endl;
+	std::cout << test_3 << std::endl;
+	std::cout << test_4 << std::endl;
+}
+
 int main(int ac, char **av) {
 	(void)ac;
 	if (ac != 2)
 		return 0;
 	if (av[1][0] == '1')
 		Allowed();
-	else
+	else {
 		Forbidden();
+		random_();	
+	}
 }

@@ -26,7 +26,7 @@ if [ $resp -eq 1 ] ; then
 	do
 		if [ -x "$executableC" ] ; then
 			random_number=$((1 + RANDOM % 3000))
-			args=$(./$executableC `jot -r $random_number -1000 1000`)
+			args=$(./$executableC `jot -r $random_number 0 10000`)
 			check=$(c++ getArgs.cpp -o args && ./args $args)
 			res=$(c++ CPPtester.cpp -o res && ./res $check)
 			if [[ $res = "Error" ]] ; then
