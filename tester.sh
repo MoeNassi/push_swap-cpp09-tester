@@ -24,20 +24,26 @@ read resp
 if [ $resp -eq 1 ] ; then
 	while (true) ;
 	do
-		args=$(./$executableC `jot -r 3000 1 1000000`)
-		check=$(c++ getArgs.cpp -o args && ./args $args)
-		res=$(c++ CPPtester.cpp -o res && ./res $check)
-		if [[ $res = "Error" ]] ; then
-			echo -e "${Red}Error: Not Sorted ${Color_Off}"
+		if [ -x "$executableC" ] ; then
+			random_number=$((1 + RANDOM % 3000))
+			args=$(./$executableC `jot -r $random_number -1000 1000`)
+			check=$(c++ getArgs.cpp -o args && ./args $args)
+			res=$(c++ CPPtester.cpp -o res && ./res $check)
+			if [[ $res = "Error" ]] ; then
+				echo -e "${Red}Error: Not Sorted ${White} $random_number${Color_Off}"
+			else
+				echo -e "${Green}Sorted: Good Shit ${White} $random_number${Color_Off}"
+			fi
 		else
-			echo -e "${Green}Sorted: Good Shit ${Color_Off}"
+			echo -e "${Red}executable not found ${Color_Off}must be written as follow ${Green}$executableC ${Color_Off}"
+			exit 0;
 		fi
 	done;
 
 elif [[ $resp -eq 2 ]] ; then
-	echo -e "${White}Parsing Tester -> (all tests needs to be passed successfuly)${Color_Off}"
 
 	if [ -x "$executable" ] ; then
+		echo -e "${White}Parsing Tester -> (all tests needs to be passed successfuly)${Color_Off}"
 		while [ "$counter" -le 20 ] ;
 			do
 				args=$(c++ push_swap.cpp && ./a.out 1)
